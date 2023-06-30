@@ -116,6 +116,9 @@ EXISTS_DEPLOYMENT=$(aws apigateway get-deployments --rest-api-id $ID | jq -r '.i
 echo "Deployment sobre API $ID"
 echo "VPCLink: $VPC_LINK_ID"
 echo "NLB: $EKS_SERVICE_HOSTNAME"
+echo "AUTH_FUNC:  $INPUT_AUTHORIZER_FUNCTION"
+echo "AUTH_ROL: $INPUT_AUTHORIZER_ROLE_NAME"
+
 
 if [ "${EXISTS_DEPLOYMENT}"=="0" ];
 then
@@ -126,7 +129,7 @@ then
         --variables "url=$EKS_SERVICE_HOSTNAME,vpcLinkId=$VPC_LINK_ID,cpat_authorizer=$INPUT_AUTHORIZER_FUNCTION,cpat_authorizer_role=$INPUT_AUTHORIZER_ROLE_NAME" 
 else
     echo "Actualizando"
-    $DEPLOYMENT_ID=$(aws apigateway get-deployments --rest-api-id 3hn50aahtd | jq -r '.items[0] |  .id')
+    $DEPLOYMENT_ID=$(aws apigateway get-deployments --rest-api-id $ID | jq -r '.items[0] |  .id')
     aws apigateway update-deployment \
         --rest-api-id $ID \
         --deployment-id $DEPLOYMENT_ID
