@@ -91,6 +91,8 @@ fi
 #Reemplazo de valores para lambda authorizer
 cp ./$INPUT_SWAGGER_PATH ./swagger_temp.yaml
 
+sed -i 's/API_NAME/'$API_NAME'/g' ./swagger_temp.yaml
+
 sed -i 's/ACCOUNT_ID/'$ACCOUNT_ID'/g'  ./swagger_temp.yaml
 
 sed -i 's/REGION/'$AWS_DEFAULT_REGION'/g'  ./swagger_temp.yaml
