@@ -97,7 +97,7 @@ sed -i 's/ACCOUNT_ID/'$ACCOUNT_ID'/g'  ./swagger_temp.yaml
 
 sed -i 's/REGION/'$AWS_DEFAULT_REGION'/g'  ./swagger_temp.yaml
 
-sed -i 's/CORS_DOMAIN/'$INPUT_CORS_DOMAIN'/g' ./swagger_temp.yaml
+sed -i 's/CORS_DOMAIN/'$CORS_DOMAIN'/g' ./swagger_temp.yaml
 
 cat  ./swagger_temp.yaml
 
