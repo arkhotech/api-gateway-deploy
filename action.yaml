@@ -57,6 +57,11 @@ inputs:
     description: CORS Domain allowed
     required: false
     default: "*"
+    
+  namespace:
+    description: Namespace objetivo
+    required: false
+    default: "cpat"
 
 
   

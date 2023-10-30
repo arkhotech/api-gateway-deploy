@@ -10,12 +10,13 @@ then
     ENVIRONMENT=$INPUT_ENVIRONMENT
 fi
 
+
 PROJECT=$INPUT_PROJECT
 
 echo "Revisando balancers asciado al servicio $SERVICE_NAME"
 NLB_LIST=$(aws elbv2 describe-load-balancers | jq -r ' [  .LoadBalancers[] | select( .Type=="network" ) |   { arn: .LoadBalancerArn, hostname: .DNSName } ] ')
 
-EKS_SERVICE_HOSTNAME=$(/kubectl get services -l cpat.service=$SERVICE_NAME -n cpat -o json | jq -r ' .items[].status.loadBalancer.ingress[].hostname')
+EKS_SERVICE_HOSTNAME=$(/kubectl get services -l cpat.service=$SERVICE_NAME -n $INPUT_NAMESPACE -o json | jq -r ' .items[].status.loadBalancer.ingress[].hostname')
 
 echo "Buscando NLB: $EKS_SERVICE_HOSTNAME"
 
